@@ -1,7 +1,8 @@
 import math
 import matplotlib.pyplot as plt
 
-VALUES = (2, 17, -84) # a, b, c
+VALUES = (2, 17, -84) # Change these values as the (a, b, c) values
+# a, b, c
 
 class Equation(object):
     def __init__(self):
