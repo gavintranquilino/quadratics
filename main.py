@@ -1,12 +1,9 @@
 import math
 import matplotlib.pyplot as plt
 
-VALUES = (2, 17, -84) # Change these values as the (a, b, c) values
-# a, b, c
-
-class Equation(object):
-    def __init__(self):
-        self.values = VALUES
+class Equation():
+    def __init__(self, values):
+        self.values = values
 
     def get_zeros(self):
         a, b, c = self.values
@@ -22,15 +19,21 @@ class Equation(object):
 
         x = (-b) / (2*a)
 
-        y = (a*(x**2)) + (b*x) + c
+        y = ((4*a*c) - (b**2)) / (4*a)
 
         return x, y
     
-    def get_standard(self):
+    def get_standard_form(self):
         a, b, c = self.values
 
         return '{}x^2 + {}x + {}'.format(a, b, c)
     
+    def get_vertex_form(self):
+        a = self.values[0]
+        h, k = self.get_vertex()
+
+        return f"{a}(x-{h})^2 + {k}"
+
 def graph(equation):
     a, b, c = equation.values
     r1, r2 = equation.get_zeros()
@@ -70,17 +73,36 @@ def graph(equation):
     plt.show()
 
 def main():
-    equation = Equation()
 
-    standard_form = equation.get_standard()
+    # User input
+    while True:
+        try:
+            a = int(input('What is the \"a\" value of your equation? (in standard form):\n'))
+            b = int(input('\"b\" value? (in standard form):\n'))
+            c = int(input('\"c\" value? (in standard form):\n'))
+            break
+        
+        except:
+            pass
+
+    # Equation class
+    equation = Equation((a, b, c))
+
+    standard_form = equation.get_standard_form()
+    vertex_form = equation.get_vertex_form()
     a, b, c = equation.values
     x1, x2 = equation.get_zeros()
     x, y = equation.get_vertex()
 
-    print('\nStandard Form = {}\n\nx = {} and x = {}\n\nVertex = {}\n\nAOS: x = {}\n'.format(standard_form, x1, x2, (x, y), x))
+    print('''
+    [+] Standard Form = {}\n
+    [+] Vertex Form = {}\n
+    [+] 1st zero/root = {}\n
+    [+] 2nd zero/root = {}\n
+    [+] Vertex = {}\n
+    [+] AOS: x = {}'''.format(standard_form, vertex_form, x1, x2, (x, y), x))
 
     graph(equation)
 
 if __name__ == '__main__':
     main()
-    # TODO find all factors
