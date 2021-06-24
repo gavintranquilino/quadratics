@@ -1,7 +1,7 @@
 import math
 import matplotlib.pyplot as plt
 
-class Equation():
+class Equation(): 
     def __init__(self, values):
         self.values = values
 
